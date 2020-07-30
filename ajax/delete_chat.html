@@ -1,0 +1,26 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+$id_chat = strip_tags($_POST['id']);
+if(isset($username)){
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    
+
+$check_chat = $db->num_row("SELECT * FROM `live_chat` WHERE `id_chat` = '{$get_user['id']}' AND `id` = '$id_chat' ");
+if($check_chat > 0){
+    $delete_chat = $db->delete('live_chat' , $id_chat);
+    if($delete_chat){
+        $status = 0;
+        $messages = "xóa chat thành công";
+    }
+}
+else {
+    $status = 1;
+    $messages = "làm người ai làm thế";
+}
+}
+echo json_encode(array('status' => $status , 'messages' => $messages));
+
+?>

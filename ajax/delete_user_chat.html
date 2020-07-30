@@ -1,0 +1,30 @@
+<?php 
+
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+if(isset($username)){
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    $name = $get_user['ho'] . " " . $get_user['ten'];
+    $get_user_chat = $db->num_row("SELECT * FROM `online_chat` WHERE `id_user_chat` = '{$get_user['id']}'");
+    if($get_user_chat == 0){
+        $status = 0;
+       
+        $messages = "Tham gia chat live cùng cộng đồng";
+    }
+    else {
+        $user_chat = $db->total("SELECT * FROM `online_chat` WHERE `id_user_chat` = '{$get_user['id']}'");
+        $delete_user_chat = $db->delete('online_chat' , $user_chat['id']);
+        if($delete_user_chat){
+            $status = 0;
+            $messages = "Thoát box chat thành công";
+        }
+        else {
+            $status = 1;
+            $messages = "Bạn vẫn còn trong box chat";
+        }
+    }
+   
+}
+echo json_encode(array('status' => $status , 'messages' => $messages));

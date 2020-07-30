@@ -1,0 +1,25 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+
+if(isset($username)){
+    $logout = session_destroy();
+    if($logout){
+        $status = 0;
+        $messages = "Bạn đã đăng xuất";
+        $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+        $get_view = $db->total("SELECT * FROM `online_views` WHERE `id_user_view` = '{$get_user['id']}'");
+        $minus_view = $db->delete('online_views' , $get_view['id']);
+    }
+    else {
+        $status = 1;
+        $messages = "Đăng xuất không thành công , vui lòng thử lại";
+    }
+}
+else {
+    $status = 1;
+    $messages = "Bạn chưa đăng nhập";
+}
+echo json_encode(array('status' => $status , 'messages' => $messages));

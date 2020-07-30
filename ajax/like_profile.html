@@ -1,0 +1,47 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+
+
+
+if(isset($username)){
+    $user_like = strip_tags($_POST['user_like']);
+    $get_user_can_like = $db->total("SELECT * FROM `users` WHERE `id` = '$user_like'");
+    $name = $get_user_can_like['ho'] . " " . $get_user_can_like['ten'];
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    $get_like_user = $db->num_row("SELECT * FROM `like_profile` WHERE `id_user_like` = '{$get_user['id']}' AND `id_user_can_like` = '$user_like'");
+    if($get_like_user > 0){
+        $get_like = $db->total("SELECT * FROM `like_profile` WHERE `id_user_like` = '{$get_user['id']}' AND `id_user_can_like` = '$user_like'");
+        $get_user_can_like['likes']--;
+        $detete_like = $db->delete('like_profile' , $get_like['id']);
+        
+        if($detete_like){
+            $status = 0;
+            $messages = "Hủy theo dõi thành công" ;
+            $update_like = $db->update('users' , array('likes' => $get_user_can_like['likes']) , array('id' => $get_user_can_like['id']));
+            $check = 1;
+        }
+    }
+    elseif($get_like_user == 0) {
+        $like = $db->insert('like_profile' , array('id_user_like' => $get_user['id'] , 'id_user_can_like' => $user_like , 'status' => 0));
+        $get_user_can_like['likes']++;
+        if($like){
+            $status = 0;
+            $messages = "Theo dõi thành công";
+            $update_like = $db->update('users' , array('likes' => $get_user_can_like['likes']) , array('id' => $get_user_can_like['id']));
+            $check = 0;
+        }
+    }
+echo json_encode(array('status' => $status , 'messages' => $messages , 'num_like' => $get_user_can_like['likes'] , 'check' => $check));
+
+}
+else {
+    $status = 1;
+    $messages = "Xin mời đăng nhập";
+echo json_encode(array('status' => $status , 'messages' => $messages));
+
+}
+
+?>

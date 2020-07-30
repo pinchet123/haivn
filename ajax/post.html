@@ -1,0 +1,13 @@
+<?php 
+session_start();
+if(isset($_SESSION['username'])){
+	$status = 0;
+	
+
+}
+else {
+	$status = 1;
+	$messages = "Xin mời đăng nhập";
+}
+echo json_encode( array('status' => $status ));
+?>

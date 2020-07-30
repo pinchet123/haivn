@@ -1,0 +1,26 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+if(isset($username)){
+    $comment = strip_tags($_POST['commnet']);
+    $id_post = $_POST['post'];
+    $get_post = $db->fetchID('post' , $id_post);
+    $num_comment = $get_post['comment'];
+    if($comment == ""){
+        $status = 1;
+        $messages = "Nội dung không được bỏ trống";
+    }
+    else {
+        $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+        $add_commnet = $db->insert('comment' , array('content' => $comment , 'id_thanhvien_cmt' => $get_user['id'] , 'id_post' => $id_post , 'date' => $date));
+        if($add_commnet){
+            $num_comment++;
+            $status = 0;
+            $messages = 'Comment thành công';
+            $update_num_comment = $db->updateview("UPDATE `post` SET `comment` = '$num_comment' WHERE `id` = '$id_post' "); 
+        }
+    }
+}
+echo json_encode(array('status' => $status , 'messages' => $messages));

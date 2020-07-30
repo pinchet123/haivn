@@ -1,0 +1,53 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+$id_post = $_POST['id_post'];
+
+if(isset($_POST['limit'])  && isset($_POST['start'])){
+    $num_post = $db->num_row('SELECT * FROM `comment`');
+    if($num_post > 0){
+    $query = $db->query("SELECT * FROM `comment` WHERE `id_post` = '$id_post' ORDER BY `id` DESC  LIMIT {$_POST['start']} , {$_POST['limit']} " );
+    if(isset($username)){
+        $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+
+    }
+   
+    
+   
+    
+        while($row = mysqli_fetch_array($query)):
+            $user_comment = $db->fetchID('users' , $row['id_thanhvien_cmt']);
+            $first_name = $user_comment['ho'];
+            $last_name = $user_comment['ten'];
+           
+?>
+<ul class="media-list">
+<li class="media">
+    <a href="#" class="pull-left">
+        <img src="assets/img/avatar/<?php echo $user_comment['avatar']; ?>" alt="" class="img-circle">
+    </a>
+    <div class="media-body">
+     <?php    if(isset($username)){ ?>
+        <?php if($row['id_thanhvien_cmt'] == $get_user['id']){ ?>
+        <p class="text-muted pull-right">
+            <a class="text-danger delete_comment" data="<?php echo $row['content']; ?>">Xóa bình luận</a>
+        </p>
+        <?php } }?>
+        <span class="text-muted pull-right">
+            <small class="text-muted"><?php echo $row['date']; ?></small>
+        </span>
+        
+        <strong class="text-success user_comment"><?php echo $first_name . " " . $last_name; ?></strong>
+        <p class="comment">
+            <?php echo $row['content'];?>
+        </p>
+    </div>
+</li>
+</ul>
+<?php endwhile; ?>
+                
+        <?php } ?>
+<!-- <?php } ?> -->
+      

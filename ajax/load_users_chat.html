@@ -1,0 +1,35 @@
+<?php 
+
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+$get_user_chat = $db->num_row("SELECT * FROM `online_chat`");
+
+if($get_user_chat > 0){
+    
+   
+    $user_live_chat = $db->query("SELECT * FROM `online_chat`");
+    
+}
+
+?>
+<?php while($row = @mysqli_fetch_array($user_live_chat)):
+ $check_user = $db->total("SELECT * FROM `users` WHERE `id` = '{$row['id_user_chat']}'");
+     $name = $check_user['ho'] . " " . $check_user['ten'];
+     $avatar = $check_user['avatar'];
+?>
+<li class="active">
+    <div class="d-flex bd-highlight">
+        <div class="img_cont">
+            <img src="assets/img/avatar/<?php echo $avatar; ?>" class="rounded-circle user_img">
+            <span class="online_icon"></span>
+        </div>
+        <div class="user_info">
+            <span><?php echo $name; ?></span>
+            <p>
+                <?php echo $name; ?> is online</p>
+        </div>
+    </div>
+</li>
+<?php endwhile; ?>

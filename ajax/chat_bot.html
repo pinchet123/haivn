@@ -1,0 +1,58 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+$text = strip_tags($_POST['text']);
+$user = strip_tags($_POST['user']);
+$html = "";
+if(isset($username)){
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    
+    if(isset($_FILES['img_chat']['name']) && $text == ""){
+        /* Location */
+        $get = 1;
+        $filename = $_FILES['img_chat']['name'];
+        $location = "../assets/img/chat/".$filename;
+        $uploadOk = 1;
+        $imageFileType = pathinfo($location,PATHINFO_EXTENSION);
+        $valid_extensions = array("jpg","jpeg","png");
+        if( !in_array(strtolower($imageFileType),$valid_extensions) ) {
+            $uploadOk = 0;
+        }
+        if($uploadOk == 0){
+            $check = 0;
+        }else{
+            /* Upload file */
+            if(move_uploaded_file($_FILES['img_chat']['tmp_name'],$location)){
+                $check = 1;
+                $send_img = $db->insert('live_chat' , array('id_chat' => $get_user['id']  , 'date' => $date , 'img' => $filename)); 
+                if($send_img){
+                    $status = 0;
+                    $messages = "gửi hình ảnh thành công";
+                }
+                
+            }else{
+                $check = 0;
+                $status = 1;
+                $messages = "không thể gửi tệp";
+               
+            }
+        }
+    }
+    if($text !== ""){
+        $send_chat = $db->insert('live_chat' , array('id_chat' => $get_user['id']  , 'content' => $text , 'date' => $date)); 
+        if($send_chat){
+            $status = 0;
+            $messages = "Nhắn tin thành công";
+        }
+        else{
+            $status = 1;
+            $messages = "Nhắn tin không thành công";
+        }
+    }
+    
+}
+echo json_encode(array('status' => $status , 'messages' => $messages));
+
+?>

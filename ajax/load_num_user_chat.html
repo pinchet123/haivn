@@ -1,0 +1,10 @@
+<?php
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+$get_user_chat = $db->num_row("SELECT * FROM `online_chat`");
+$num_user_chat = $get_user_chat;
+$get_num_chat = $db->num_row("SELECT * FROM `live_chat`");
+$num_chat = $get_num_chat;
+echo json_encode(array('num_user' => $num_user_chat , 'num_chat' => $num_chat));

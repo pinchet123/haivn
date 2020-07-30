@@ -1,0 +1,80 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+
+$chat = $db->query("SELECT * FROM `live_chat`");
+while($row = @mysqli_fetch_assoc($chat)): 
+ $get_user_chat = $db->total("SELECT * FROM `users` WHERE `id` = '{$row['id_chat']}'") ;
+ $name = $get_user_chat['ho'] . " " . $get_user_chat['ten'];
+if(isset($username)){
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ") ;
+
+?>
+
+
+<?php if($row['id_chat'] == $get_user['id']){ ?>
+<div class="d-flex justify-content-end mb-5 line_chat">
+    <span class="name_user_time"><?php echo $name; ?></span>
+    
+    <div class="msg_cotainer_send">
+        <?php if($row['img'] == ""){ ?>
+        <?php echo $row['content']; ?>
+        <?php } else { ?> 
+            <a href="assets/img/post/<?php echo $get_post['img']; ?>?image=250" data-toggle="lightbox" data-max-width="100%" data-type="image" class="open_images">
+            <img src="assets/img/chat/<?php echo $row['img']; ?>" alt="" class="img-fluid img-chat">  
+        </a>  
+        <?php } ?>
+        <a class="delete_chat text-danger" data="<?php echo $row['id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+
+        <span class="msg_time_send"><?php echo $row['date']; ?></span>
+    </div>
+    <div class="img_cont_msg">
+        <img src="assets/img/avatar/<?php echo $get_user_chat['avatar']; ?>" class="rounded-circle user_img_msg" title="<?php echo $name; ?>">
+    </div>
+</div>
+
+<?php } else {  ?>
+<div class="d-flex justify-content-start mb-5 line_chat">
+    <div class="img_cont_msg">
+
+        <img src="assets/img/avatar/<?php echo $get_user_chat['avatar']; ?>" class="rounded-circle user_img_msg" title="<?php echo $name; ?>">
+    </div>
+    <span class="name_user"><?php echo $name; ?></span>
+
+    <div class="msg_cotainer">
+
+
+        <?php if($row['img'] == ""){ ?>
+            <?php echo $row['content']; ?>
+            <?php } else { ?> 
+                <img src="assets/img/chat/<?php echo $row['img']; ?>" alt="" class="img-fluid img-chat">    
+            <?php } ?>
+
+        <span class="msg_time"><?php echo $row['date']; ?></span>
+    </div>
+</div>
+<?php } } else {?>
+<div class="d-flex justify-content-start mb-5 line_chat">
+    <div class="img_cont_msg">
+
+        <img src="assets/img/avatar/<?php echo $get_user_chat['avatar']; ?>" class="rounded-circle user_img_msg" title="<?php echo $name; ?>">
+    </div>
+    <span class="name_user"><?php echo $name; ?></span>
+
+    <div class="msg_cotainer">
+
+
+        <?php if($row['img'] == "" ){ ?>
+            <?php echo $row['content']; ?>
+            <?php } else { ?> 
+                <img src="assets/img/chat/<?php echo $row['img']; ?>" alt="" class="img-fluid img-chat">    
+            <?php } ?>
+
+        <span class="msg_time"><?php echo $row['date']; ?></span>
+    </div>
+</div>
+<?php } ?>
+
+<?php endwhile; ?>

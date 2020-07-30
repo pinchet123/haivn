@@ -1,0 +1,47 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+
+
+
+if(isset($username)){
+    $user_follow = strip_tags($_POST['user_follow']);
+    $get_user_can_follow = $db->total("SELECT * FROM `users` WHERE `id` = '$user_follow'");
+    $name = $get_user_can_follow['ho'] . " " . $get_user_can_follow['ten'];
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    $get_follow_user = $db->num_row("SELECT * FROM `follow` WHERE `id_user_follow` = '{$get_user['id']}' AND `id_user_can_follow` = '$user_follow'");
+    if($get_follow_user > 0){
+        $get_follow = $db->total("SELECT * FROM `follow` WHERE `id_user_follow` = '{$get_user['id']}' AND `id_user_can_follow` = '$user_follow'");
+        $get_user_can_follow['follow']--;
+        $detete_follow = $db->delete('follow' , $get_follow['id']);
+        
+        if($detete_follow){
+            $status = 0;
+            $messages = "Hủy theo dõi thành công" ;
+            $update_follow = $db->update('users' , array('follow' => $get_user_can_follow['follow']) , array('id' => $get_user_can_follow['id']));
+            $check = 1;
+        }
+    }
+    elseif($get_follow_user == 0) {
+        $follow = $db->insert('follow' , array('id_user_follow' => $get_user['id'] , 'id_user_can_follow' => $user_follow , 'status' => 0));
+        $get_user_can_follow['follow']++;
+        if($follow){
+            $status = 0;
+            $messages = "Theo dõi thành công";
+            $update_follow = $db->update('users' , array('follow' => $get_user_can_follow['follow']) , array('id' => $get_user_can_follow['id']));
+            $check = 0;
+        }
+    }
+echo json_encode(array('status' => $status , 'messages' => $messages , 'num_follow' => $get_user_can_follow['follow'] , 'check' => $check));
+
+}
+else {
+    $status = 1;
+    $messages = "Xin mời đăng nhập";
+echo json_encode(array('status' => $status , 'messages' => $messages));
+
+}
+
+?>

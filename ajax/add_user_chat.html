@@ -1,0 +1,29 @@
+<?php 
+
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+if(isset($username)){
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    $name = $get_user['ho'] . " " . $get_user['ten'];
+$get_num_user = $db->num_row("SELECT * FROM `online_chat` WHERE `id_user_chat` = '{$get_user['id']}'");
+if($get_num_user == 0){
+    $add_user_chat = $db->insert('online_chat' , array( 'id_user_chat' => $get_user['id'] , 'name_chat' => $name ));
+    if($add_user_chat){
+        $status = 0;
+        $messages = "Bạn đã tham gia phòng chat";
+    }
+    else {
+        $status = 1;
+        $messages = "error";
+    }
+}
+    else {
+        $status = 0;
+        $messages = "Bạn đang ở trong phòng chat";
+    }
+}
+$get_user_chat = $db->num_row("SELECT * FROM `online_chat`");
+$num_chat = $get_user_chat;
+echo json_encode(array('status' => $status , 'messages' => $messages , 'num_chat' => $num_chat));

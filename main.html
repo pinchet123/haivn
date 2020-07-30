@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#" tabindex="-1">Hot <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" tabindex="-1">Mới</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clip hài </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#" tabindex="-1">Action</a>
+                                <a class="dropdown-item" href="#" tabindex="-1">Another action</a>
+
+                                <a class="dropdown-item" href="#" tabindex="-1">Something else here</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1">Ảnh động</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1">Link hay</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1">Chuyện cười</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#" tabindex="-1">Chuyện chế</a>
+                        </li>
+                    </ul>
+                    <button type="button" id="login" class="btn btn-primary">login / regis</button>
+                    <button type="button" id="post" class="btn btn-danger mx-2">Đăng bài</button>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row head py-3">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 ">
+                    <p>HaiVN.com - Cộng Đồng Mạng Việt Nam</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                    <i class="fas fa-cog " data-toggle="modal" data-target="#exampleModal"></i>
+                    <i class="fas fa-mobile-alt phone"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-8 col-xl-8 col-lg-8">
+                <h5 class="title py-2">New Images</h5>
+                <div class="alert alert-warning" role="alert">
+                    ban la nguoi quyet dinh bai viet co duoc hien thi hay khong, bai viet co luong dislike tren 10 thi se bi loai bo click nut dislike &nbsp;<i class="fas fa-thumbs-down"></i>
+                    <br> Chú ý : HaiVN đang trong giai đoạn thử nghiệm
+                </div>
+                <div class="row post py-3">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <img src="assets/img/anh.jpg" alt="" class="img-fluid img-post">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <div class="view">
+                            <h5 class="title ">Nguyễn Ngọc Lưu Linh kute xinh đẹp</h5>
+                            <p>
+                                <a class="far fa-eye views" href="">&nbsp;200</a>
+                                <a class="fas fa-comments commnets" href=""> &nbsp; 22 &nbsp;</a>
+                                <a class="fas fa-thumbs-down dislike" href="">&nbsp;10</a>
+                                <a class="far fa-heart like" href=""> &nbsp; 100</a></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row bootstrap snippets">
+                    <div class="col-md-6 col-md-offset-2 col-sm-12">
+                        <div class="comment-wrapper">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    Comment panel
+                                </div>
+                                <div class="panel-body">
+                                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                                    <br>
+                                    <button type="button" class="btn btn-info pull-right">Post</button>
+                                    <div class="clearfix"></div>
+                                    <hr>
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                    <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@MartinoMont</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                     <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@LaurenceCorreil</strong>
+                                                <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <a href="#" class="pull-left">
+                                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle">
+                                            </a>
+                                            <div class="media-body">
+                                                <span class="text-muted pull-right">
+                                                     <small class="text-muted">30 min ago</small>
+                                                </span>
+                                                <strong class="text-success">@JohnNida</strong>
+                                                <p>
+                                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-4 col-xl-4 col-lg-4">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">thiết lập nhanh</h5>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="row ">
+                                    <div class="col">
+                                        tự động thu gọn ảnh
+                                    </div>
+                                    <div class="col">
+                                        <label class="switch">
+                                        <input type="checkbox"  data="off" id="input">
+                                        <span></span> 
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h5 class="title py-2">Xu huong</h5>
+                <ul class="list-group">
+                    <li class="list-group-item ">
+                        <h5> <i class="fab fa-hotjar text-danger"></i> &nbsp; clip Hot</h5>
+                        <ul>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item ">
+                        <h5> <i class="fab fa-hotjar text-danger"></i> &nbsp; clip Hot</h5>
+                        <ul>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item ">
+                        <h5> <i class="fab fa-hotjar text-danger"></i> &nbsp; clip Hot</h5>
+                        <ul>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                            <li><a href=""> Việt Nam Sắp Có Nhật Thực Cực Đẹp....</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+
+
+        </div>
+
+    </main>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">   <i class="fas fa-arrow-up"></i></button>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

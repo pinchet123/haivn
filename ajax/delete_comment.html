@@ -1,0 +1,36 @@
+<?php 
+session_start();
+include "../Database.php";
+include "../Function.php";
+$db = new Database;
+if(isset($username)){
+    $comment = strip_tags($_POST['comment']);
+    $user_comment = strip_tags($_POST['user_comment']);
+    $id_post = strip_tags($_POST['id_post']);
+    $get_user = $db->total("SELECT * FROM `users` WHERE `user` = '$username' ");
+    $get_comment = $db->total("SELECT * FROM `comment` WHERE `content` = '$comment' AND `id_thanhvien_cmt` = '{$get_user['id']}' AND `id_post` = '$id_post'");
+
+    $get_post = $db->total("SELECT * FROM `post` WHERE `id` = '$id_post'");
+    $num_comment = $get_post['comment'];
+    $num_comment_user = $db->num_row("SELECT * FROM `comment` WHERE `content` = '$comment' AND `id_thanhvien_cmt` = '{$get_user['id']}' AND `id_post` = '$id_post'");
+    if($num_comment_user > 0){
+        $delete_comment = $db->delete('comment' , $get_comment['id']);
+        if($delete_comment){
+            $status = 0;
+            $messages = "Đã xóa bình luận";
+            $num_comment--;
+            $update_num_comment = $db->updateview("UPDATE `post` SET `comment` = '$num_comment' WHERE `id` = '$id_post' "); 
+        }
+        else {
+            $status = 1;
+            $messages = "Xóa bình luận lỗi";
+        }
+
+    }
+    else {
+        $status = 1;
+        $messages = "làm người ai làm thế";
+    }
+}
+
+echo json_encode(array('status' => $status , 'messages' => $messages));
