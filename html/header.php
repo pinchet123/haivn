@@ -53,7 +53,7 @@ $num_online = $db->num_row("SELECT * FROM `online_views`");
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">Navbar</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">test</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="Toggle navigation">
